@@ -16,6 +16,19 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 npm install
 ```
 
+### Presented with prompts for several optional
+```sh
+✔ Project name: … <your-project-name>
+✔ Add TypeScript? … No / Yes
+✔ Add JSX Support? … No / Yes
+✔ Add Vue Router for Single Page Application development? … No / Yes
+✔ Add Pinia for state management? … No / Yes
+✔ Add Vitest for Unit testing? … No / Yes
+✔ Add an End-to-End Testing Solution? … No / Cypress / Playwright
+✔ Add ESLint for code quality? … No / Yes
+✔ Add Prettier for code formatting? … No / Yes
+```
+
 ### Compile and Hot-Reload for Development
 
 ```sh
@@ -26,4 +39,11 @@ npm run dev
 
 ```sh
 npm run build
+```
+### Using Vue from CDN​
+You can use Vue directly from a CDN via a script tag:
+
+```sh
+html
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 ```
