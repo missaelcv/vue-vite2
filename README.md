@@ -44,6 +44,43 @@ npm run build
 You can use Vue directly from a CDN via a script tag:
 
 ```sh
-html
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+```
+
+### Using the Global Build​
+The above link loads the global build of Vue, where all top-level APIs are exposed as properties on the global Vue object. Here is a full example using the global build:
+
+```sh
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">{{ message }}</div>
+<script>
+  const { createApp, ref } = Vue
+  createApp({
+    setup() {
+      const message = ref('Hello vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
+```
+
+### Using the ES Module Build
+Throughout the rest of the documentation, we will be primarily using ES modules syntax. Most modern browsers now support ES modules natively, so we can use Vue from a CDN via native ES modules like this:
+
+```sh
+<div id="app">{{ message }}</div>
+<script type="module">
+  import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+  createApp({
+    setup() {
+      const message = ref('Hello Vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
 ```
