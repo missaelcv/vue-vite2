@@ -84,3 +84,10 @@ Throughout the rest of the documentation, we will be primarily using ES modules 
   }).mount('#app')
 </script>
 ```
+
+### Enabling Import maps​
+In the above example, we are importing from the full CDN URL, but in the rest of the documentation you will see code like this:
+
+```sh
+import { createApp } from 'vue'
+```
