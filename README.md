@@ -90,4 +90,60 @@ In the above example, we are importing from the full CDN URL, but in the rest of
 
 ```sh
 import { createApp } from 'vue'
+
+We can teach the browser where to locate the vue import by using Import Maps:
+
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+    }
+  }
+</script>
+
+<div id="app">{{ message }}</div>
+<script type="module">
+  import { createApp, ref } from 'vue'
+  createApp({
+    setup() {
+      const message = ref('Hello Vue!')
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
 ```
+
+### Splitting Up the Modules​
+As we dive deeper into the guide, we may need to split our code into separate JavaScript files so that they are easier to manage. For example:
+
+```sh
+<!-- index.html -->
+<div id="app"></div>
+<script type="module">
+  import { createApp } from 'vue'
+  import MyComponent from './my-component.js'
+  createApp(MyComponent).mount('#app')
+</script>
+```
+
+```sh
+import { ref } from 'vue'
+export default {
+  setup() {
+    const count = ref(0)
+    return { count }
+  },
+  template: `<div>count is {{ count }}</div>`
+}
+```
+
+// If you directly open the above index.html in your browser, you will find that it throws an error because ES modules cannot work over the file:// protocol, which is the protocol the browser uses when you open a local file.
+
+Due to security reasons, ES modules can only work over the http:// protocol, which is what the browsers use when opening pages on the web. In order for ES modules to work on our local machine, we need to serve the index.html over the http:// protocol, with a local HTTP server.
+
+To start a local HTTP server, first make sure you have Node.js installed, then run npx serve from the command line in the same directory where your HTML file is. You can also use any other HTTP server that can serve static files with the correct MIME types.
+
+You may have noticed that the imported component's template is inlined as a JavaScript string. If you are using VSCode, you can install the es6-string-html extension and prefix the strings with a /*html*/ comment to get syntax highlighting for them.
+// 
